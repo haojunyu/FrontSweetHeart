@@ -83,7 +83,7 @@ Page({
             // 记录单号
             var orderUri = app.globalData.baseUrl + '/api/v1.0/orders'
             var orderData = {}
-            orderData['userId']=app.globalData.userId
+            orderData['userId']=app.globalData.userInfo['id']
             orderData['cakeId']=that.data.cakeDetail.cakeId
             orderData['status']=1
             orderData['prepayId']=data['prepay']['prepay_id']
