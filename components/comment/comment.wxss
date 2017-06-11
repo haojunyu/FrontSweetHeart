@@ -33,9 +33,6 @@
 
 .weui-media-box_pics{
   margin-top: 16rpx;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
   align-items: center;
 }
 

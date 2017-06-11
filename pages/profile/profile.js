@@ -22,7 +22,7 @@ Page({
 
   },
   onShow: function(){
-    console.log('profile onShowe')
+    console.log('profile onShow')
     // 获取个人账户信息
     var that = this
     var userUri = app.globalData.baseUrl + '/api/v1.0/users/' + app.globalData.userInfo['id']
@@ -34,6 +34,7 @@ Page({
       })
     })
 
+    console.log(app.globalData.userInfo)
     // 获取各类状态订单的数量
     var orderUri = app.globalData.baseUrl + '/api/v1.0/users/'+app.globalData.userInfo['id']+'/orders/statusNum'
     getApiData( orderUri, {}, token, function(data){

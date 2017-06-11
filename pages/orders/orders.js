@@ -17,7 +17,7 @@ Page({
   },
   // 显示界面
   onShow: function(){
-    var orderUrl = app.globalData.baseUrl + '/api/v1.0/users/' + app.globalData.userId + '/status/' + this.data.status
+    var orderUrl = app.globalData.baseUrl + '/api/v1.0/users/' + app.globalData.userInfo['id'] + '/status/' + this.data.status
     var that = this
     var token = app.globalData.token + ':none'
     console.log('token: '+token)

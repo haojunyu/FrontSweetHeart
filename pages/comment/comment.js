@@ -75,7 +75,7 @@ Page({
     var comUri = app.globalData.baseUrl + '/api/v1.0/comments'
     var data = {}
     data['cakeId']=this.data.cakeId
-    data['userId']=app.globalData.userId
+    data['userId']=app.globalData.userInfo['id']
     data['stars']=this.data.key
     data['comment']=e.detail.value.txt
 
@@ -112,48 +112,51 @@ Page({
 
 
   },
+  // 递归上传图片到服务器
   uploadImage: function(files, commentId){
     console.log('function uploadImage...')
+    console.log(files)
     console.log(commentId)
     var token = app.globalData.token + ':none'
-    var preName = app.globalData.userId + '_' + this.data.cakeId + '_'
+    var preName = app.globalData.userInfo['id'] + '_' + this.data.cakeId + '_'
     // 批量上传图片到服务器
-    for(var ind in files){
-      console.log('uploadImage '+files[ind]+'....')
-      if(ind < 8){
-        wx.uploadFile({
-          url: app.globalData.baseUrl + '/api/v1.0/upload',
-          filePath: files[ind],
-          name: 'file',
-          formData:{
-            'fileName': preName + files[ind].substring(13)
-          },
-          header  : {
-            'authorization': 'Basic ' + Base64.encode(token),
-            'context-type'  : 'multipart/form-data'
-          },
-          success: function(res){
-            console.log(res)
-            console.log('uploadImage '+files[ind]+' successed!')
-            var picUri = app.globalData.baseUrl + '/api/v1.0/pictures'
-            var data = {}
-            data['commentId']=commentId
-            data['picName']=preName + files[ind].substring(13)
-            // 更新数据库表pictures
-            postApiData( picUri, data, token, function(data){
-              console.log(data)
-              console.log('postApiData[POST] /pictures')
-            })
-          },
-          fail: function(res){
-            console.log('wx.uploadFile fail...')
-          },
-          complete: function(res){
-            console.log('wx.uploadFile complete...')
-            console.log(res)
-          }
-        })
-      }
+    if(files.length != 0){
+      console.log('uploadImage '+files[0]+'....')
+      var that = this
+      wx.uploadFile({
+        url: app.globalData.baseUrl + '/api/v1.0/upload',
+        filePath: files[0],
+        name: 'file',
+        formData:{
+          'fileName': preName + files[0].substring(13)
+        },
+        header  : {
+          'authorization': 'Basic ' + Base64.encode(token),
+          'context-type'  : 'multipart/form-data'
+        },
+        success: function(res){
+          console.log(res)
+          console.log('uploadImage '+files[0]+' successed!')
+          var picUri = app.globalData.baseUrl + '/api/v1.0/pictures'
+          var data = {}
+          data['commentId']=commentId
+          data['picName']=preName + files[0].substring(13)
+          // 更新数据库表pictures
+          postApiData( picUri, data, token, function(data){
+            console.log(data)
+            console.log('postApiData[POST] /pictures')
+          })
+          files.splice(0,1)
+          that.uploadImage(files,commentId)
+        },
+        fail: function(res){
+          console.log('wx.uploadFile fail...')
+        },
+        complete: function(res){
+          console.log('wx.uploadFile complete...')
+          console.log(res)
+        }
+      })
     }
   }
 })
