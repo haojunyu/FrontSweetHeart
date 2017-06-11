@@ -1,0 +1,17 @@
+<!--index.wxml-->
+<view class="container">
+  <swiper indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="banner">
+    <block wx:for="{{imgUrls}}" wx:key="*this">
+      <swiper-item>
+        <image src="{{item}}"/>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="usermotto">
+    <text>
+      欢迎<text class="userinfo-nickname">{{userInfo.nickName}}</text>来到甜点密语
+    </text>
+  </view>
+</view>

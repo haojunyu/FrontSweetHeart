@@ -1,0 +1,48 @@
+<import src='../../components/star/star.wxml' />
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">
+        <view wx:if="{{status == 1}}"> 已下单 </view>
+        <view wx:elif="{{status == 2}}"> 已消费 </view>
+        <view wx:elif="{{status ==3 }}"> 已评价 </view>
+        <view wx:else>未知状态</view>
+      </view>
+      <view class="weui-panel__bd">
+        <block wx:for="{{orders}}" wx:key="index" wx:for-item="order">
+          <view class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg"  bindtap="goCakeDetail" data-uri='{{order.cake.uri}}'>
+                  <image class="weui-media-box__thumb" src="../../res/imgs/cakes/{{order.cake.imgUrl}}" />
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg" bindtap="goCakeDetail" data-uri='{{order.cake.uri}}'>
+                <view class="weui-media-box__title">{{order.cake.desc}}</view>
+                <view class="weui-media-box__desc">单号:{{order.orderId}}</view>
+              </view>
+              <view class="weui-media-box__hd weui-media-box__opera">
+                <view wx:if="{{status == 1}}">
+                  <button class="weui-btn" type="warn" disabled="true" size="mini">去消费</button>
+                </view>
+                <view wx:elif="{{status == 2}}">
+                  <button class="weui-btn" type="default"  bindtap="goComment" data-cakeid="{{order.cake.cakeId}}" data-orderid="{{order.orderId}}">去评价</button>
+                </view>
+                <view wx:elif="{{status ==3 }}">
+                  <button class="weui-btn" type="primary" disabled="true" size="mini">完成</button>
+                </view>
+                <view wx:else>
+                  <button class="weui-btn" type="warn"  disabled="true" size="mini">未知状态</button>
+                </view>
+
+              </view>
+          </view>
+        </block>
+      </view>
+      <view class="weui-panel__ft">
+          <view class="weui-cell weui-cell_access weui-cell_link">
+              <view class="weui-cell__bd">查看更多</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </view>
+      </view>
+  </view>
+
+  </view>
+</view>

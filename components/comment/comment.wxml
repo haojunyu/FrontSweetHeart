@@ -1,0 +1,28 @@
+<import src='../star/star.wxml' />
+<template name='comments'>
+  <view class='weui-panel'>
+    <view class="weui-panel__hd">网友点评({{counts}})</view>
+    <view class="weui-panel__bd">
+      <block wx:for='{{comments}}' wx:for-item='comment' wx:for-index='index' wx:key='comment.id'>
+        <view class="weui-media-box comment">
+          <view class="weui-media-box__hd">
+              <image class="cover" src="{{comment.user.avatarUrl}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title">{{comment.user.nickName}}</view>
+              <view class="weui-media-box_leftright">
+                <template is='star' data="{{counts:comment.stars}}" />
+                <view class="weui-media-box__timestamp">{{comment.timestamp}}</view>
+              </view>
+              <view class="weui-media-box__desc comment-content">{{comment.comment}}</view>
+              <view class='weui-media-box_pics'>
+                <block wx:for="{{comment.photos}}" wx:for-index='jdex' wx:key='*this'>
+                  <image src="{{imgUrl}}upload/{{item.picName}}" mode="aspectFill" bindtap='photoScan' data-index='{{index}}' data-jdex='{{jdex}}'></image>
+                </block>
+              </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</template>

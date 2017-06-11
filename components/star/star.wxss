@@ -1,0 +1,18 @@
+.star-image{
+  width: 15px;
+  height: 15px;
+  src: "../../res/imgs/starNormal.png";
+}
+
+.weui-media-box__stars{
+  height:15px;
+  line-height: 1em;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.item {
+  position: absolute;
+  width: 7.5px;
+  height: 15px;
+}

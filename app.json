@@ -1,0 +1,40 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/cakes/cakes",
+    "pages/cake/cake",
+    "pages/profile/profile",
+    "pages/orders/orders",
+    "pages/comment/comment"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#262626",
+    "navigationBarTitleText": "甜点密语",
+    "navigationBarTextStyle":"#fff",
+    "enablePullDownRefresh": false
+  },
+  "tabBar":{
+    "list":[{
+      "pagePath": "pages/index/index",
+      "text": "首页",
+      "iconPath":"res/imgs/home.png",
+      "selectedIconPath":"res/imgs/home-actived.png"
+    },{
+      "pagePath": "pages/cakes/cakes",
+      "text": "甜点",
+      "iconPath":"res/imgs/cake.png",
+      "selectedIconPath":"res/imgs/cake-actived.png"
+    },{
+      "pagePath": "pages/profile/profile",
+      "text": "个人",
+      "iconPath":"res/imgs/profile.png",
+      "selectedIconPath":"res/imgs/profile-actived.png"
+    }],
+    "backgroundColor": "#f3f3f3",
+    "borderStyle": "white",
+    "color":"#353535",
+    "selectedColor":"#09bb07"
+  }
+}

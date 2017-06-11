@@ -1,0 +1,58 @@
+<!--profile.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title">{{userInfo.nickName}}</view>
+              <view class="weui-media-box__desc">余额：{{userInfo.cashbox}}</view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+
+    <view class="weui-panel">
+      <view class="weui-panel__hd">订单详情</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_small-appmsg">
+          <view class="weui-cells weui-cells_in-small-appmsg">
+            <navigator url="../orders/orders?status=1" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd"><image src="../../res/imgs/order.png" style="width: 20px;height: 20px;margin-right: 5px" /></view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view class="display: inline-block; vertical-align: middle">已下单</view>
+              </view>
+              <view wx:if="{{ordNum[1]}}">
+                <view class="weui-badge" style="margin-left: 5px;">{{ordNum[1]}}</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="../orders/orders?status=2" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd"><image src="../../res/imgs/consume.png" style="width: 20px;height: 20px;margin-right: 5px" /></view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>已消费</view>
+              </view>
+              <view wx:if="{{ordNum[2]}}">
+                <view class="weui-badge" style="margin-left: 5px;">{{ordNum[2]}}</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+            <navigator url="../orders/orders?status=3" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+              <view class="weui-cell__hd"><image src="../../res/imgs/comment.png" style="width: 20px;height: 20px;margin-right: 5px" /></view>
+              <view class="weui-cell__bd weui-cell_primary">
+                <view>已评价</view>
+              </view>
+              <view wx:if="{{ordNum[3]}}">
+                <view class="weui-badge" style="margin-left: 5px;">{{ordNum[3]}}</view>
+              </view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

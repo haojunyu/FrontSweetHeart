@@ -1,0 +1,10 @@
+<template name='star'>
+  <view class="weui-media-box__stars">
+    <block wx:for="{{[0,1,2,3,4]}}" wx:key="index">
+      <image class="star-image" style="left: {{item*36}}px" src="../../res/imgs/{{counts > item ?(counts-item == 0.5? 'starHalf':'starSelected') : 'starNormal'}}.png">
+        <view class="item" style="left:0px" data-key="{{item+0.5}}" bindtap="selectLeft"></view>
+        <view class="item" style="left:18px" data-key="{{item+1}}" bindtap="selectRight"></view>
+      </image>
+    </block>
+  </view>
+</template>

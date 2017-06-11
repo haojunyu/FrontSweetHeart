@@ -1,0 +1,47 @@
+@import '../../components/star/star.wxss';
+.comment{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.comment .cover{
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 60rpx;
+  margin-right: 20rpx;
+}
+
+.weui-media-box_leftright{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+}
+
+.weui-media-box__timestamp{
+  height:15px;
+  line-height: 1em;
+  vertical-align: middle;
+  display: inline-block;
+  font-weight:300;
+}
+
+.comment-content{
+  margin-top: 10px;
+}
+
+.weui-media-box_pics{
+  margin-top: 16rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.weui-media-box_pics image{
+  width: 120rpx;
+  height: 120rpx;
+  display: inline-block;
+  margin-right: 40rpx;
+}

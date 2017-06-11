@@ -1,0 +1,24 @@
+/**comment.wxss**/
+@import '../../components/star/star.wxss';
+
+.star-image{
+  width: 36px;
+  height: 36px;
+  src: "../../res/imgs/starNormal.png";
+  position: absolute;
+}
+
+.weui-media-box__stars{
+  height:36px;
+  line-height: 1em;
+  vertical-align: middle;
+  display: inline-block;
+  position: relative;
+}
+
+.item {
+  position: absolute;
+  top: 0px;
+  width: 18px;
+  height: 36px;
+}
