@@ -3,6 +3,7 @@
 var app = getApp(),
     getApiData = require("../../utils/apiData.js").getApiData,
     postApiData = require("../../utils/apiData.js").postApiData,
+    putApiData = require("../../utils/apiData.js").putApiData,
     md5 = require("../../utils/md5.js").hex_md5
 Page({
   data: {
@@ -54,11 +55,27 @@ Page({
   gobuy: function(e){
     var token = app.globalData.token + ':none'
     console.log('立即下单......')
+    var cashbox = parseFloat(app.globalData.userInfo['cashbox'])
+    var price = parseFloat(this.data.cakeDetail['price'])
+    var fee = 0.0
+    var discount = 0.0
+    if( cashbox > 0){
+      if(cashbox <= price){
+        fee = price - cashbox
+        discount = cashbox
+      }else{
+        fee = 0.01
+        discount = price-0.01
+      }
+    }else{
+      fee = price
+    }
+
     var that = this
     // 获取预付单信息 （金额赋值为this.data.cakeDetail['price']）
     getApiData(app.globalData.baseUrl + '/api/v1.0/prepay', {
       'body' : app.globalData.mch_name + '-' + this.data.cakeDetail['cate']['desc'],
-      'total_fee': '0.01',
+      'total_fee': fee,
       'notify_url': app.globalData.baseUrl + 'api/v1.0/notify'
     }, token, function(data){
       if(data['prepay']['return_code'] = 'SUCCESS' && data['prepay']['result_code']){
@@ -92,6 +109,16 @@ Page({
               console.log(data)
               console.log('postApiData[POST] /orders')
             })
+
+            // 更新数据库表user.cashbox
+            if(discount != 0.0){
+              var userUri = app.globalData.baseUrl + '/api/v1.0/users/' + app.globalData.userInfo['id'] + '/subCash'
+              putApiData(userUri, {
+                'cash': discount
+              }, token, function(res){
+                console.log('消费余额'+ discount +'元成功！')
+              })
+            }
 
             // 跳转到已下单界面
             wx.redirectTo({

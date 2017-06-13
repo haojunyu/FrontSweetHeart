@@ -7,6 +7,7 @@ App({
     wx.clearStorageSync()
     console.log('clear storeage......')
 
+
     //登录验证
     this.logIn(ops)
 
@@ -55,23 +56,39 @@ App({
       that.globalData.userInfo['cashbox'] = res['cashbox']
       console.log(that.globalData.userInfo)
     },function(res){
-      // complete是在success完成之后
-      if(that.globalData.userInfo['is_first']){
-        // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/scene.html
-        // 目前支持单人分享，群分享，加钱
-        if(ops.scene == 1007 || ops.scene == 1044){
-          var ds = ops.query
-          if(ds.hasOwnProperty('userId')){
-            var token = that.globalData.token + ':none'
-            var userUri = that.globalData.baseUrl + '/api/v1.0/users/' + ds['userId'] + '/addCash'
-            putApiData(userUri, {
-              'cash': 2
-            }, token, function(res){
-              console.log('领取2元券成功！')
-            })
+      // 登录成功后获取app的配置
+      var getApiData = require("utils/apiData.js").getApiData
+      var token = that.globalData.token + ':none'
+      var configUri = that.globalData.baseUrl + '/api/v1.0/initConfigs'
+      var these = that
+      getApiData(configUri, '', token, function(data){
+        // 设置配置
+        these.globalData.configs = data
+        console.log(data)
+
+        // complete是在success完成之后
+        if(these.globalData.userInfo['is_first']){
+          // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/scene.html
+          // 目前支持单人分享，群分享，加钱
+          if(ops.scene == 1007 || ops.scene == 1044){
+            var ds = ops.query
+            if(ds.hasOwnProperty('userId')){
+              var token = these.globalData.token + ':none'
+              var userUri = these.globalData.baseUrl + '/api/v1.0/users/' + ds['userId'] + '/addCash'
+              var cash = float(these.globalData.configs['invalid_user_cash'])
+              if(these.globalData.userInfo['city'] == 'Zhenjiang'){
+                cash = float(these.globalData.configs['valid_user_cash'])
+              }
+              putApiData(userUri, {
+                'cash': cash
+              }, token, function(res){
+                console.log('领取券'+ cash +'成功！')
+              })
+            }
           }
         }
-      }
+      })
+
     })
   },
   getUserInfo:function(cb){
@@ -99,6 +116,6 @@ App({
     userInfo: null,
     baseUrl : 'https://flask.haojunyu.com',
     token: null,
-    mch_name: '甜点密语烘焙店'
+    configs: null
   }
 })

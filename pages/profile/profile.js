@@ -29,8 +29,10 @@ Page({
     var token = app.globalData.token + ':none'
     getApiData( userUri, {}, token, function(data){
       console.log('getApiData[onLoad] users/id')
+      // 更新全局cashbox
+      app.globalData.userInfo['cashbox'] = data['cashbox']
       that.setData({
-        userInfo : data
+        userInfo : app.globalData.userInfo
       })
     })
 
