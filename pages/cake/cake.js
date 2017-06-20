@@ -51,15 +51,44 @@ Page({
       })
     })
   },
+  // 定位
+  locate: function(e){
+    console.log('location')
+    var latitude=32.19634838375969
+    var longitude=119.436195097602
+
+    wx.openLocation({
+      latitude: latitude,
+      longitude: longitude,
+      scale: 28
+    })
+    /*
+    wx.chooseLocation({
+      success: function(res){
+        console.log(res)
+      }
+    })
+    */
+  },
+  // 打电话
+  call: function(e){
+    var phone = e.currentTarget.dataset['phone']
+    console.log(phone)
+
+    wx.makePhoneCall({
+      phoneNumber: phone
+    })
+  },
   // 下单
   gobuy: function(e){
     var token = app.globalData.token + ':none'
     console.log('立即下单......')
     var cashbox = parseFloat(app.globalData.userInfo['cashbox'])
     var price = parseFloat(this.data.cakeDetail['price'])
-    var fee = 0.0
-    var discount = 0.0
-    if( cashbox > 0){
+    console.log(price)
+    var fee = 0.00
+    var discount = 0.00
+    if( cashbox > 0.0){
       if(cashbox <= price){
         fee = price - cashbox
         discount = cashbox
@@ -70,7 +99,10 @@ Page({
     }else{
       fee = price
     }
-
+    fee = parseFloat(fee).toFixed(2)
+    discount = parseFloat(discount).toFixed(2)
+    console.log(fee)
+    console.log(discount)
     var that = this
     // 获取预付单信息 （金额赋值为this.data.cakeDetail['price']）
     getApiData(app.globalData.baseUrl + '/api/v1.0/prepay', {
@@ -132,6 +164,21 @@ Page({
         })
       }
       console.log(data)
+    })
+  },
+  // 预览图片
+  photoScan: function(e){
+    var photos = this.data.cakeComments[e.currentTarget.dataset['index']].photos
+    var photoUrls = new Array();
+    for(var i=0; i<photos.length; i++ ){
+      photoUrls[i] = this.data.imgUrl + 'upload/' +photos[i].picName
+    }
+    console.log(e.currentTarget.dataset['item'])
+    console.log(photoUrls)
+
+    wx.previewImage({
+        current: e.currentTarget.dataset['item'], // 当前显示图片的http链接
+        urls: photoUrls // 需要预览的图片http链接列表
     })
   }
 

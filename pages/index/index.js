@@ -4,9 +4,9 @@ var app = getApp()
 Page({
   data: {
     imgUrls: [
-      "../../res/imgs/index/banner1.jpg",
-      "../../res/imgs/index/banner2.jpg",
-      "../../res/imgs/index/banner3.jpg"
+      "../../res/imgs/index/mm.jpeg",
+      "../../res/imgs/index/qm.jpeg",
+      "../../res/imgs/index/gzt.jpeg"
     ],
     indicatorDots: true,
     autoplay: true,
@@ -46,8 +46,8 @@ Page({
 
   onShareAppMessage: function () {
     return {
-      title: '转发送券',
-      desc: '转发微信小程序获取代金券，一次5元',
+      title: '你转发，我送钱！不相信，别点开！',
+      desc: '每转发一次获3元奖励，可累加！',
       path: 'pages/index/index?userId='+app.globalData.userInfo['id'],
       success: function(res) {
         // 转发成功

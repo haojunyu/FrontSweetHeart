@@ -63,11 +63,12 @@ App({
       var these = that
       getApiData(configUri, '', token, function(data){
         // 设置配置
-        these.globalData.configs = data
+        these.globalData.configs = data.configs
         console.log(data)
 
         // complete是在success完成之后
         if(these.globalData.userInfo['is_first']){
+          console.log(these.globalData.configs)
           // https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/scene.html
           // 目前支持单人分享，群分享，加钱
           if(ops.scene == 1007 || ops.scene == 1044){
@@ -75,9 +76,9 @@ App({
             if(ds.hasOwnProperty('userId')){
               var token = these.globalData.token + ':none'
               var userUri = these.globalData.baseUrl + '/api/v1.0/users/' + ds['userId'] + '/addCash'
-              var cash = float(these.globalData.configs['invalid_user_cash'])
+              var cash = parseFloat(these.globalData.configs['invalid_user_cash'])
               if(these.globalData.userInfo['city'] == 'Zhenjiang'){
-                cash = float(these.globalData.configs['valid_user_cash'])
+                cash = parseFloat(these.globalData.configs['valid_user_cash'])
               }
               putApiData(userUri, {
                 'cash': cash

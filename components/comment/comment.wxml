@@ -17,7 +17,7 @@
               <view class="weui-media-box__desc comment-content">{{comment.comment}}</view>
               <view class='weui-media-box_pics'>
                 <block wx:for="{{comment.photos}}" wx:for-index='jdex' wx:key='*this'>
-                  <image src="{{imgUrl}}upload/{{item.picName}}" mode="aspectFill" bindtap='photoScan' data-index='{{index}}' data-jdex='{{jdex}}'></image>
+                  <image src="{{imgUrl}}upload/{{item.picName}}" mode="aspectFill" bindtap='photoScan' data-index='{{index}}' data-jdex='{{jdex}}' data-item="{{imgUrl}}upload/{{item.picName}}"></image>
                 </block>
               </view>
           </view>

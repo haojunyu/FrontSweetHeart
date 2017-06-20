@@ -123,6 +123,21 @@ Page({
         wx.setStorageSync(cateUrl, data.cakes)
       })
     }
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '你转发，我送钱！不相信，别点开！',
+      desc: '每转发一次获3元奖励，可累加！',
+      path: 'pages/index/index?userId='+app.globalData.userInfo['id'],
+      success: function(res) {
+        // 转发成功
+        console.log('function[onShareAppMessage] success!')
+      },
+      fail: function(res) {
+        // 转发失败
+        console.log('function[onShareAppMessage] fail!')
+      }
+    }
   }
 
 })
