@@ -11,16 +11,19 @@
 
   <view class="usermotto">
     <text>
-      欢迎<text class="userinfo-nickname">{{userInfo.nickName}}</text>来到甜点密语
+      欢迎<text class="userinfo-nickname">{{userInfo.nickName}}</text>来到甜点密语DIY烘焙坊
     </text>
     <text>
-      点击右上角可转发给新用户，获取3元奖励！可累加，不限次数！
+      点击右上角可转发给新用户，获取2元奖励！可累加，不限次数！
     </text>
     <text>
-      点击'我的' 可查看转发获取的奖励！
+      点击'个人' 可查看转发获取的奖励！
     </text>
     <text class="userinfo-surprise">
       转发多多！ 惊喜多多！
+    </text>
+    <text class="userinfo-surprise">
+      小程序入口：发现 -> 小程序
     </text>
   </view>
 </view>

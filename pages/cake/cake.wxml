@@ -5,7 +5,7 @@
     <swiper indicator-dots="true"
     autoplay="true" interval="5000" duration="1000" class="banner">
       <swiper-item>
-        <image src="{{imgUrl}}1_{{cakeDetail.imgUrl}}" mode="aspectFill"/>
+        <image src="{{imgUrl}}1_{{cakeDetail.imgUrl}}" mode="aspectFill" class="cake_image"/>
       </swiper-item>
     </swiper>
 

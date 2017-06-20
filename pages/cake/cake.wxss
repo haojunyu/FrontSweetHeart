@@ -9,6 +9,10 @@
   margin-left: 10px;
 }
 
+.cake_image{
+  width: 100%;
+}
+
 .weui-media-box__price{
   margin-right:.4em;
   width:70px;
